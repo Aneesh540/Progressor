@@ -2,13 +2,51 @@
 
 {% block directory_todo_entry %}
 
-    {% for items in directory_todos %}
-        <h2 class="h2">{{items.entry}}</h2>
-    {% endfor %}
+    <div class="container ">
+
+    <ul class="list-group">
+
+        {% for item in directory_todos %}
+
+            <li class="list-group-item list-group-item-light">
+
+                <a href="#">
+
+                {% if item.completed %}
+                    <span class="icon"><i class="fas fa-check-circle"></i></span>
+                        <del>{{ item.entry }}</del>
+                {% else %}
+                    <span class="icon"><i class="fas fa-dot-circle"></i></span>
+                    <span>{{item.entry}}</span>
+                    </a>
+
+
+
+        {% endif %}
+
+            <div class="float-right">
+                 <i class="fas fa-edit"></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i class="fas fa-star"></i>
+            </div>
+            </li>
+
+        {% endfor %}
+    </ul>
+
+    </div>
+    <br>
+    <div class="container">
 
     <form method="post" action="{% url 'directory_content' dir_id=pwd.id %}">
         {% csrf_token %}
-        {{ add_todo_entry }}
+
+        <div><h5>ee</h5>{{ add_todo_entry }}</div>
+
     </form>
+    </div>
 
 {% endblock %}

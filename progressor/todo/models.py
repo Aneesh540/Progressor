@@ -20,6 +20,7 @@ class Todoentry(models.Model):
     due_date = models.DateField(blank=True, null=True)
 
     important = models.BooleanField(default=False)
+    completed = models.BooleanField(default=False)
 
     def __str__(self):
         return "{0} | {1}".format(self.entry, self.basedir.name)
