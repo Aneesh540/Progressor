@@ -1,0 +1,14 @@
+{% extends 'todo/base.html' %}
+
+{% block directory_todo_entry %}
+
+    {% for items in directory_todos %}
+        <h2 class="h2">{{items.entry}}</h2>
+    {% endfor %}
+
+    <form method="post" action="{% url 'directory_content' dir_id=pwd.id %}">
+        {% csrf_token %}
+        {{ add_todo_entry }}
+    </form>
+
+{% endblock %}

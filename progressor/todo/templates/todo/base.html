@@ -26,82 +26,48 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Bootstrap Sidebar</h3>
-                <strong>BS</strong>
+                <h3>Todo Directory</h3>
+                <strong>Todo</strong>
             </div>
 
             <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-home"></i>
-                        Home
-                    </a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a href="#">Home 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Home 3</a>
-                        </li>
-                    </ul>
-                </li>
                 <li>
                     <a href="#">
-                        <i class="fas fa-briefcase"></i>
-                        About
-                    </a>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                        <i class="fas fa-copy"></i>
-                        Pages
-                    </a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        <li>
-                            <a href="#">Page 1</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 2</a>
-                        </li>
-                        <li>
-                            <a href="#">Page 3</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-image"></i>
-                        Portfolio
+                        <i class="fas fa-star"></i>
+                        Important
                     </a>
                 </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-question"></i>
-                        FAQ
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-paper-plane"></i>
-                        Contact
-                    </a>
-                </li>
+                {% for items in directory %}
+                    <li>
+                        <a href="{% url 'directory_content'  dir_id=items.id %}">
 
+                            {% if items.necessary %}
+                                <i class="fas fa-home"></i>
+                            {% else %}
+                                <i class="fas fa-tasks"></i>
+                            {% endif %}
+
+                            {{ items.name }}
+                            <div class="container"
+                            <span class="badge badge-danger badge-pill">1</span>
+
+                        </a>
+
+                    </li>
+                {% endfor %}
                 <hr>
+
                 <li>
                     <div class="container">
-                    <form method="post" action="/add/">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="gkMK3E6F0sDmIoeQ49kRCAByVKkmmu2qkJwc4FDa9N45OcHKHLmxDwRD7yk5ONuF">
-                            <label for="id_text">Text:</label><input type="text" name="text" class="form-control" placeholder="enter a todo e.g. complete app " rows="3" maxlength="50" required="" id="id_text">
-                            <br>
-
-                    </form>
-                </div>
+                        <form method="post" action="{% url 'add_directory' %}">
+                            {% csrf_token %}
+                            <i class="fas fa-plus"></i>
+                            {{ new_dir_form }}
+                        </form>
+                    </div>
                 </li>
 
             </ul>
-
 
         </nav>
 
@@ -113,8 +79,8 @@
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
                     </button>
+
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
@@ -122,66 +88,49 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <a class="nav-link" href="#">Page</a>
+                                <button type="button" class="btn btn-danger" title="Delete folder">
+                                    <span class="fas fa-trash-alt"></span>
+                                    Delete folder
+                                </button>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+
+
+                            <li class="nav-item active">
+                                <button type="button" class="btn btn-danger" title="Delete folder">
+                                    <span class="fas fa-trash-alt"></span>
+                                    Delete folder
+                                </button>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+
+
+                            <li class="nav-item active">
+                                <button class="btn"><i class="fa fa-home"></i> Home</button>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Page</a>
+                            <li class="nav-item active">
+                                <button class="btn"><i class="fa fa-home"></i> Home</button>
                             </li>
+
+
+
+
+
+
+
+
+
+
                         </ul>
                     </div>
                 </div>
             </nav>
 
-            <h2>Collapsible Sidebar Using Bootstrap 4</h2>
-            <div class="container ">
-                    <form method="post" action="/add/">
-                            <input type="hidden" name="csrfmiddlewaretoken" value="gkMK3E6F0sDmIoeQ49kRCAByVKkmmu2qkJwc4FDa9N45OcHKHLmxDwRD7yk5ONuF">
-                            <label for="id_text">Text:</label><input type="text" name="text" class="form-control" placeholder="enter a todo e.g. complete app " rows="3" maxlength="50" required="" id="id_text">
-                            <br>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                    </div>
-
-                    <div class="container ">
-                            <h2 class="h2">Your tasks</h2>
-                            <ul class="list-group">
+            {% block directory_todo_entry %}
+            {% endblock %}
 
 
 
-                                        <a href="/change_completed/33/" class="list-group-item list-group-item-action list-group-item-light">
-                                            aneehs jai
-                                        </a>
-
-
-
-
-
-                                        <a href="/change_completed/32/" class="list-group-item list-group-item-action list-group-item-light">
-                                            start data sturctures
-                                        </a>
-
-
-
-
-
-                                        <a href="/change_completed/31/" class="list-group-item list-group-item-action list-group-item-light">
-                                            watch avatar the last airbender
-                                        </a>
-
-
-
-                            </ul>
-
-                            </div>
-
-                            <input id="baseAddInput" class="baseAdd-input chromeless" type="text" maxlength="255" aria-labelledby="baseAddInput" placeholder="Add a task" value="">
         </div>
+
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->
