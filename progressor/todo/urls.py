@@ -7,6 +7,8 @@ urlpatterns = [
     path('add_directory/',views.add_directory,name="add_directory"),
     path('directory/<int:dir_id>',views.directory_content,name="directory_content"),
     path('important/',views.view_important,name="important"),
-    path('testing',views.testing,name="testing"),
+    path('delete_folder/<int:dir_id>',views.delete_folder,name="delete_folder"),
+
+    path('testing/<int:dir_id>',views.testing,name="testing"),
 
 ]

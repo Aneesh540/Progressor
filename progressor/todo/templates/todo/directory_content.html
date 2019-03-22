@@ -57,6 +57,36 @@
 
 
 
-{% block button_blocks %}
+{% block button_block %}
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+      <a href="{% url 'delete_folder' dir_id=pwd.id %}">
+        <button type="button" class="btn btn-success">
+            <span class="fas fa-trash-alt"></span>
+            Delete folder
+        </button>
+      </a>
 
+  </div>
+
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+
+          <a href="#">
+            <button type="button" class="btn btn-success">
+                <span class="fas fa-trash-alt"></span>
+                Clear Completed
+            </button>
+          </a>
+
+    </div>
+
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+
+      <a href="#">
+        <button type="button" class="btn btn-success">
+            <span class="fas fa-trash-alt"></span>
+            Clear All
+        </button>
+      </a>
+
+  </div>
 {% endblock %}

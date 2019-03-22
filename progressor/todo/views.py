@@ -7,9 +7,11 @@ from . import forms
 
 
 def home(request):
+    all_directory = models.Directory.objects.all()
     new_dir_form = forms.NewDirectoryForm()
     directory = models.Directory.objects.all()
-    context = {'directory': directory,'new_dir_form':new_dir_form}
+    context = {'all_directories': directory,'new_dir_form':new_dir_form}
+
 
     return render(request,'todo/base.html',context=context)
 
@@ -27,9 +29,6 @@ def directory_content(request,dir_id):
 
     all_directories = models.Directory.objects.all()
     pwd = models.Directory.objects.get(pk=dir_id)
-
-
-
 
     new_dir_form = forms.NewDirectoryForm()
     add_todo_form = forms.AddTodoentry()
@@ -55,7 +54,18 @@ def directory_content(request,dir_id):
 
 
 def view_important(request):
+    return HttpResponse('importat')
+
+def delete_folder(request,dir_id):
+    folder = models.Directory.objects.get(pk=dir_id)
+    folder.delete()
+    return redirect('home')
+
+
+
+
+def clear_completed(request,dir_id):
     pass
 
-def testing(request):
+def testing(request,dir_id):
     return HttpResponse("testing completed")

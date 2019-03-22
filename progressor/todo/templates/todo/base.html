@@ -108,39 +108,14 @@
 
 
   <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-  <div class="btn-group mr-2" role="group" aria-label="First group">
-
-      <a href="{% url 'testing' %}">
-        <button type="button" class="btn btn-success">
-            <span class="fas fa-trash-alt"></span>
-                                        Delete folder
-        </button>
-      </a>
-
-  </div>
+      {% block button_block %}
+      {% endblock %}
 
 
 
-      <div class="btn-group mr-2" role="group" aria-label="First group">
 
-      <a href="{% url 'testing' %}">
-        <button type="button" class="btn btn-success">
-            <span class="fas fa-trash-alt"></span>
-                                        Delete folder
-        </button>
-      </a>
 
-  </div>
-      <div class="btn-group mr-2" role="group" aria-label="First group">
 
-      <a href="{% url 'testing' %}">
-        <button type="button" class="btn btn-success">
-            <span class="fas fa-trash-alt"></span>
-                                        Delete folder
-        </button>
-      </a>
-
-  </div>
 
 </div>
 
