@@ -1,0 +1,46 @@
+{% extends 'todo/base.html' %}
+
+ {% block directory_name %}
+     Important
+ {% endblock %}
+
+
+{% block directory_todo_entry %}
+
+
+
+        {% for item in all_todos %}
+
+            {% if item.important %}
+
+                <li class="list-group-item list-group-item-light">
+
+                    <a href="{% url 'for_important' todo_id=item.id%}">
+                        {% if item.completed %}
+                            <span class="icon"><i class="fas fa-check-circle"></i></span>
+                                <del>{{ item.entry }}</del>
+                        {% else %}
+                            <span class="icon"><i class="fas fa-dot-circle"></i></span>
+                            <span>{{item.entry}}</span>
+                        {% endif %}
+                        <div class="float-right">
+                            <i class="fas fa-edit"></i>
+                                <i></i><i></i><i></i><i></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </a>
+
+            {% endif %}
+
+
+
+            </li>
+
+
+        {% endfor %}
+
+
+
+
+{% endblock %}
+

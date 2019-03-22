@@ -7,14 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Collapsible sidebar using Bootstrap 4</title>
+    <title>Todo App</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{% static 'todo/style4.css' %}">
 
-    <!-- Font Awesome JS -->
+{#    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">#}
+{#  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>#}
+{#  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>#}
+
+{#    <!-- Font Awesome JS -->#}
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
@@ -35,11 +39,17 @@
                     <a href="{% url 'important' %}">
                         <i class="fas fa-star"></i>
                         Important
+                        <div class="float-right">
+                                <span class="badge badge-danger badge-pill">
+                                    {{ total_important_items }}
+                                </span>
+                            </div>
                     </a>
                 </li>
                 {% for items in all_directories %}
                     <li>
-                        <a href="{% url 'directory_content'  dir_id=items.id %}">
+                        <a href="{{ items.get_absolute_url }}">
+{#                        {% url 'directory_content'  dir_id=items.id %}#}
 
                             {% if items.necessary %}
                                 <i class="fas fa-home"></i>
@@ -90,49 +100,41 @@
                             {% endblock %}
                         </h3>
 
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
-                    </button>
-
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">
-                            <li class="nav-item active">
+    <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item active">
 
-                            </li>
-
-
+        </li>
 
 
 
 
 
-  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
       {% block button_block %}
       {% endblock %}
 
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
+    </div>
 
 
                         </ul>
                     </div>
-                </div>
-            </nav>
+
+        </div>
+</nav>
+
+
+<div class="container ">
+    <ul class="list-group">
 
             {% block directory_todo_entry %}
             {% endblock %}
+        </li>
+    </ul>
+</div>
 
 
 

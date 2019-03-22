@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 class Directory(models.Model):
     name = models.CharField(max_length=50, blank=False)
@@ -7,6 +8,9 @@ class Directory(models.Model):
 
     def __str__(self):
         return "{0} | {1}".format(self.name,self.id)
+
+    def get_absolute_url(self):
+        return reverse("directory_content",kwargs={'dir_id':self.id})
 
 
 
@@ -24,6 +28,13 @@ class Todoentry(models.Model):
 
     def __str__(self):
         return "{0} | {1}".format(self.entry, self.basedir.name)
+
+    def get_absolute_url(self):
+        return reverse("directory_content",kwargs={'dir_id':self.id})
+
+    def get_aliter_url(self):
+        return reverse("aliter_status",kwargs={'todo_id':self.id})
+
 
 
 class Details(models.Model):

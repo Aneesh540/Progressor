@@ -6,51 +6,49 @@
 
 {% block directory_todo_entry %}
 
-    <div class="container ">
-
-    <ul class="list-group">
-
         {% for item in pwd.todoentry_set.all %}
 
             <li class="list-group-item list-group-item-light">
 
-                <a href="#">
+                <a href="{{ item.get_aliter_url }}">
+                    {% if item.completed %}
+                        <span class="icon"><i class="fas fa-check-circle"></i></span>
+                            <del>{{ item.entry }}</del>
+                    {% else %}
+                        <span class="icon"><i class="fas fa-dot-circle"></i></span>
+                        <span>{{item.entry}}</span>
+                    {% endif %}
+                </a>
 
-                {% if item.completed %}
-                    <span class="icon"><i class="fas fa-check-circle"></i></span>
-                        <del>{{ item.entry }}</del>
-                {% else %}
-                    <span class="icon"><i class="fas fa-dot-circle"></i></span>
-                    <span>{{item.entry}}</span>
-                    </a>
+                <div class="float-right">
+                    <a href="#"> <i class="fas fa-edit"></i> </a>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    {% if item.important %}
+                        <a href="{% url 'aliter_importance' todo_id=item.id %}" title="remove from important"> <i class="fas fa-bell"></i> </a>
 
+                    {% else %}
+                        <a href="{% url 'aliter_importance' todo_id=item.id %}" title="add to important"> <i class="fas fa-bell-slash"></i> </a>
 
-
-        {% endif %}
-
-            <div class="float-right">
-                 <i class="fas fa-edit"></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i></i>
-                <i class="fas fa-star"></i>
+                    {% endif %}
             </div>
+
             </li>
 
         {% endfor %}
-    </ul>
 
-    </div>
     <br>
     <div class="container">
 
-    <form method="post" action="{% url 'directory_content' dir_id=pwd.id %}">
-        {% csrf_token %}
+        <form method="post" action="{% url 'directory_content' dir_id=pwd.id %}">
+            {% csrf_token %}
 
-        <div><h5>ee</h5>{{ add_todo_form }}</div>
+            <div><strong>Add new entry
+            </strong>{{ add_todo_form }}</div>
 
-    </form>
+        </form>
     </div>
 
 {% endblock %}
@@ -58,7 +56,9 @@
 
 
 {% block button_block %}
-  <div class="btn-group mr-2" role="group" aria-label="First group">
+    <!-- Delete Directory button -->
+    {% if not pwd.necessary %}
+    <div class="btn-group mr-2" role="group" aria-label="First group">
       <a href="{% url 'delete_folder' dir_id=pwd.id %}">
         <button type="button" class="btn btn-success">
             <span class="fas fa-trash-alt"></span>
@@ -67,10 +67,13 @@
       </a>
 
   </div>
+    {% endif %}
+
+
 
       <div class="btn-group mr-2" role="group" aria-label="First group">
 
-          <a href="#">
+          <a href="{% url 'delete_completed' dir_id=pwd.id %}">
             <button type="button" class="btn btn-success">
                 <span class="fas fa-trash-alt"></span>
                 Clear Completed
@@ -81,7 +84,7 @@
 
       <div class="btn-group mr-2" role="group" aria-label="First group">
 
-      <a href="#">
+      <a href="{% url 'delete_all' dir_id=pwd.id %}">
         <button type="button" class="btn btn-success">
             <span class="fas fa-trash-alt"></span>
             Clear All
