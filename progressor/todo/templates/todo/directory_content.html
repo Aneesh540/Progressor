@@ -1,12 +1,16 @@
 {% extends 'todo/base.html' %}
 
+ {% block directory_name %}
+     {{ pwd.name }}
+ {% endblock %}
+
 {% block directory_todo_entry %}
 
     <div class="container ">
 
     <ul class="list-group">
 
-        {% for item in directory_todos %}
+        {% for item in pwd.todoentry_set.all %}
 
             <li class="list-group-item list-group-item-light">
 
@@ -44,9 +48,15 @@
     <form method="post" action="{% url 'directory_content' dir_id=pwd.id %}">
         {% csrf_token %}
 
-        <div><h5>ee</h5>{{ add_todo_entry }}</div>
+        <div><h5>ee</h5>{{ add_todo_form }}</div>
 
     </form>
     </div>
+
+{% endblock %}
+
+
+
+{% block button_blocks %}
 
 {% endblock %}

@@ -4,6 +4,8 @@ from django.views.decorators.http import require_POST
 from . import models
 from . import forms
 
+
+
 def home(request):
     new_dir_form = forms.NewDirectoryForm()
     directory = models.Directory.objects.all()
@@ -21,27 +23,25 @@ def add_directory(request):
     return redirect('home')
 
 
-
-
-
 def directory_content(request,dir_id):
 
-    directory = models.Directory.objects.get(pk=dir_id)
+    all_directories = models.Directory.objects.all()
+    pwd = models.Directory.objects.get(pk=dir_id)
 
-    directory_todos = directory.todoentry_set.all()
-    directory_base = models.Directory.objects.all()
+
+
 
     new_dir_form = forms.NewDirectoryForm()
-    add_todo_entry = forms.AddTodoentry()
+    add_todo_form = forms.AddTodoentry()
 
-    context = {'directory_todos':directory_todos,
-           'pwd': directory,
-           'directory': directory_base,
+    context = {
+           'pwd': pwd,
+           'all_directories': all_directories,
            'new_dir_form':new_dir_form,
-           'add_todo_entry': add_todo_entry}
+           'add_todo_form': add_todo_form}
 
     if request.method == "POST":
-        print("febwvbwvwbvwvbvbwvb")
+
         new_todo = forms.AddTodoentry(request.POST)
 
         if new_todo.is_valid():
@@ -51,3 +51,11 @@ def directory_content(request,dir_id):
 
 
     return render(request,'todo/directory_content.html',context=context)
+
+
+
+def view_important(request):
+    pass
+
+def testing(request):
+    return HttpResponse("testing completed")

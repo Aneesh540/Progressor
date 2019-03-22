@@ -32,12 +32,12 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">
+                    <a href="{% url 'important' %}">
                         <i class="fas fa-star"></i>
                         Important
                     </a>
                 </li>
-                {% for items in directory %}
+                {% for items in all_directories %}
                     <li>
                         <a href="{% url 'directory_content'  dir_id=items.id %}">
 
@@ -83,6 +83,13 @@
                         <i class="fas fa-align-left"></i>
                     </button>
 
+
+
+                        <h3 class="h3">
+                            {% block directory_name %}
+                            {% endblock %}
+                        </h3>
+
                     <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>
                     </button>
@@ -91,29 +98,51 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item active">
-                                <button type="button" class="btn btn-danger" title="Delete folder">
-                                    <span class="fas fa-trash-alt"></span>
-                                    Delete folder
-                                </button>
+
                             </li>
 
 
-                            <li class="nav-item active">
-                                <button type="button" class="btn btn-danger" title="Delete folder">
-                                    <span class="fas fa-trash-alt"></span>
-                                    Delete folder
-                                </button>
-                            </li>
 
 
-                            <li class="nav-item active">
-                                <button class="btn"><i class="fa fa-home"></i> Home</button>
-                            </li>
-                            <li class="nav-item active">
-                                <button class="btn"><i class="fa fa-home"></i> Home</button>
-                            </li>
 
 
+
+  <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group mr-2" role="group" aria-label="First group">
+
+      <a href="{% url 'testing' %}">
+        <button type="button" class="btn btn-success">
+            <span class="fas fa-trash-alt"></span>
+                                        Delete folder
+        </button>
+      </a>
+
+  </div>
+
+
+
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+
+      <a href="{% url 'testing' %}">
+        <button type="button" class="btn btn-success">
+            <span class="fas fa-trash-alt"></span>
+                                        Delete folder
+        </button>
+      </a>
+
+  </div>
+      <div class="btn-group mr-2" role="group" aria-label="First group">
+
+      <a href="{% url 'testing' %}">
+        <button type="button" class="btn btn-success">
+            <span class="fas fa-trash-alt"></span>
+                                        Delete folder
+        </button>
+      </a>
+
+  </div>
+
+</div>
 
 
 
