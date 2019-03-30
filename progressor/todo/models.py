@@ -12,6 +12,8 @@ class Directory(models.Model):
     def get_absolute_url(self):
         return reverse("directory_content",kwargs={'dir_id':self.id})
 
+    def get_not_completed(self):
+        return self.todoentry_set.filter(completed=False).count()
 
 
 class Todoentry(models.Model):

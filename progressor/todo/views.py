@@ -10,7 +10,7 @@ def view_important(request):
     all_directories = models.Directory.objects.all()
     all_todos = models.Todoentry.objects.all()
     new_dir_form = forms.NewDirectoryForm()
-    total_important_items = models.Todoentry.objects.filter(important=True).count()
+    total_important_items = models.Todoentry.objects.filter(important=True,completed=False).count()
 
     context = {'all_directories':all_directories,
                'new_dir_form':new_dir_form,
@@ -35,12 +35,15 @@ def directory_content(request,dir_id):
     pwd = models.Directory.objects.get(pk=dir_id)
     total_important_items = models.Todoentry.objects.filter(important=True).count()
 
+    todo_list = pwd.todoentry_set.order_by('completed')
+
     new_dir_form = forms.NewDirectoryForm()
     add_todo_form = forms.AddTodoentry()
 
     context = {
            'pwd': pwd,
            'all_directories': all_directories,
+            'todo_list':todo_list,
            'new_dir_form':new_dir_form,
            'add_todo_form': add_todo_form,
             'total_important_items':total_important_items}

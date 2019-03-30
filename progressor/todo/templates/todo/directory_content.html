@@ -6,7 +6,7 @@
 
 {% block directory_todo_entry %}
 
-        {% for item in pwd.todoentry_set.all %}
+        {% for item in todo_list %}
 
             <li class="list-group-item list-group-item-light">
 
@@ -38,6 +38,7 @@
             </li>
 
         {% endfor %}
+
 
     <br>
     <div class="container">
